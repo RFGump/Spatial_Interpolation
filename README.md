@@ -204,9 +204,10 @@ data pncactm.glm_weather_day_200001_201507;
 run;
 
 ## Step 6: Compute statistics for each variable
-•	Max, Min, and Range don’t need to be calculated for dummy variables
-•	Missing values exist for kurtosis, skewness, and coefficient of variation when variable has only one value.
-/* Calculate stats for daily observations */
+*	Max, Min, and Range don’t need to be calculated for dummy variables
+*	Missing values exist for kurtosis, skewness, and coefficient of variation when variable has only one value.
+
+'/* Calculate stats for daily observations */
 proc means data=pncactm.glm_weather_day_200001_201507 noprint nway missing;
   class geofips;
   var cldg_1 dptp_1 htdg_1 mnrh_1 prcp_1 pres_1 snow_1 snwd_1 tmax_1 tmin_1 tmpw_1 wnds_1 trng;
@@ -238,6 +239,4 @@ proc sort data=glm_weather_2; by geofips; run;
 data pncactm.glm_weather_sum_200001_201507;
   merge glm_weather_1 glm_weather_2;
   by geofips;
-run;
-
-
+run;'
