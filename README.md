@@ -1,4 +1,4 @@
-# Spatial_Interpolation
+# Spatial-Temporal Interpolation
 
 Code for imputing missing values in weather data
 
