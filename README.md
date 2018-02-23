@@ -49,9 +49,10 @@ Conclusions:
 *	snow should be zero when prcp is zero
 
 ## Step 2: Combine data in SAS
-•	Transfer .dbf file to the SAS server via WinSCP.
-•	The following program was used to read the .dbf files and combine them into a single SAS dataset.
+*	Transfer .dbf file to the SAS server via WinSCP.
+*	The following program was used to read the .dbf files and combine them into a single SAS dataset.
 
+```
 options mlogic mprint merror;
 %macro wthrin(invar);
 
@@ -112,6 +113,7 @@ run;
 proc sql;
   drop table cldg,dptp,htdg,mnrh,prcp,pres,snow,snwd,tmax,tmin,tmpw,wndd,wnds;
 quit;
+```
 
 ## Step 3: Attach latitude, longitude, and county names
 •	Download the county shapefile from the US Census website.
@@ -119,6 +121,8 @@ https://catalog.data.gov/dataset/tiger-line-shapefile-2014-nation-u-s-current-co
 •	Transfer the .dbf file to SAS
 •	Create additional variables (year, day, state_fips, cnty_fips)
 •	Merge the shapefile with the weather data to get latitude and longitude.
+
+```
 proc sort data=pncactm.weather; by geofips; run;
 proc sort data=me.counties; by fips; run;
 
@@ -152,6 +156,7 @@ data pncactm.weather;
   ObsDt = datejul(year*1000 + day);
   format ObsDt date9.;
 run;
+```
 
 ## Step 4: Impute missing values in R
 •	Transfer weather file back to SQL server for use in R.  
@@ -167,7 +172,9 @@ run;
 •	R Programs\pres_interpolation.R
 
 ## Step 5: Calculate derived variables in SAS
-•	Average temperature, cooling degree days, and heating degree days can be calculated based on values of high and low temperatures.
+*	Average temperature, cooling degree days, and heating degree days can be calculated based on values of high and low temperatures.
+
+```
 data pncactm.weather_temp;
   set pncactm.weather_temp;
 
@@ -178,7 +185,11 @@ data pncactm.weather_temp;
   if htdg = . then htdg_1 = max(65 - tmpw, 0);
               else htdg_1 = htdg;
 run;
-•	Multiplied dummy variables by 100 to increase values of statistics
+```
+
+*	Multiplied dummy variables by 100 to increase values of statistics
+
+```
 data pncactm.glm_weather_day_200001_201507;
   set pncactm.weather_temp (where=(lat ne .));
 
@@ -202,6 +213,7 @@ data pncactm.glm_weather_day_200001_201507;
   FrzPrcp = prcpany * tmin32 / 100;
 
 run;
+```
 
 ## Step 6: Compute statistics for each variable
 *	Max, Min, and Range don’t need to be calculated for dummy variables
