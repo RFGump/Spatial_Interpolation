@@ -3,9 +3,8 @@
 Code for imputing missing values in weather data
 
 ## Step 1: Update GLM Weather Variables
-Extract data from Colossus
-Colossus files are available on the Synergos disc .  The files have also been copied to \\eagle.usaa.com\usaa\pc\Insight_Delivery\MODELING\MODELING_3\2015_Weather_Update\STI_Colossus.
 The Colossus program extracts the data in a .dbf format.  Based on this data format, the output files cannot be larger than 2.0 GB.  In addition, the path and filename must not include any spaces.
+
 Right click on Colossus.exe and select “Run as administrator.”  When requested, enter your user ID and password.
 •	Step 1 – Database Selection
 -	Select the database for the years desired
@@ -18,6 +17,7 @@ Right click on Colossus.exe and select “Run as administrator.”  When request
 -	Output time period – select ‘Daily’
 -	Database Format – select ‘Single Column Format’
 -	Not Available (NA) Handling Options – Select ‘Handle as Text’
+
 Preliminary Data Evaluation
 
 Missing values by year
@@ -45,9 +45,11 @@ Conclusions:
 •	level of missing values has improved for some variables in more recent years
 •	wndd has high levels of missing values and isn’t very useful in models – decision to omit
 •	snow should be zero when prcp is zero
-Combine data in SAS
+
+## Step 2: Combine data in SAS
 •	Transfer .dbf file to the SAS server via WinSCP.
 •	The following program was used to read the .dbf files and combine them into a single SAS dataset.
+
 options mlogic mprint merror;
 %macro wthrin(invar);
 
