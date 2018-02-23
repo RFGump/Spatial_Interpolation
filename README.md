@@ -42,11 +42,11 @@ Missing values by year
 | 2015 | 0.14% | 0.14% | 10.07% | 10.07% | 0.08% | 31.76% | 1.88% | 5.90% | 0.14% | 0.14% | 0.14% | 20.52% | 9.11%|
 
 Conclusions:
-•	tmin, tmax, and prcp have consistently low levels of missing values
-•	cldg, htdg, and tmpw can be derived from tmin and tmax when missing
-•	level of missing values has improved for some variables in more recent years
-•	wndd has high levels of missing values and isn’t very useful in models – decision to omit
-•	snow should be zero when prcp is zero
+* tmin, tmax, and prcp have consistently low levels of missing values
+* cldg, htdg, and tmpw can be derived from tmin and tmax when missing
+* level of missing values has improved for some variables in more recent years
+*	wndd has high levels of missing values and isn’t very useful in models – decision to omit
+*	snow should be zero when prcp is zero
 
 ## Step 2: Combine data in SAS
 •	Transfer .dbf file to the SAS server via WinSCP.
