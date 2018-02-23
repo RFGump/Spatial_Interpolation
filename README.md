@@ -2,7 +2,7 @@
 
 Code for imputing missing values in weather data
 
-Update GLM Weather Variables
+## Step 1: Update GLM Weather Variables
 Extract data from Colossus
 Colossus files are available on the Synergos disc .  The files have also been copied to \\eagle.usaa.com\usaa\pc\Insight_Delivery\MODELING\MODELING_3\2015_Weather_Update\STI_Colossus.
 The Colossus program extracts the data in a .dbf format.  Based on this data format, the output files cannot be larger than 2.0 GB.  In addition, the path and filename must not include any spaces.
