@@ -207,9 +207,9 @@ run;
 *	Max, Min, and Range don’t need to be calculated for dummy variables
 *	Missing values exist for kurtosis, skewness, and coefficient of variation when variable has only one value.
 
-`/* Calculate stats for daily observations */
-proc means data=pncactm.glm_weather_day_200001_201507 noprint nway missing;
-  class geofips;
+`/* Calculate stats for daily observations */`
+`proc means data=pncactm.glm_weather_day_200001_201507 noprint nway missing;`
+`  class geofips;`
   var cldg_1 dptp_1 htdg_1 mnrh_1 prcp_1 pres_1 snow_1 snwd_1 tmax_1 tmin_1 tmpw_1 wnds_1 trng;
   output out=glm_weather_1 (drop=_type_ _freq_)
     mean=  cldg_av dptp_av htdg_av mnrh_av prcp_av pres_av snow_av snwd_av tmax_av tmin_av tmpw_av wnds_av trng_av
