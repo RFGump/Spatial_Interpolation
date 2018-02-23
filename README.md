@@ -110,7 +110,8 @@ run;
 proc sql;
   drop table cldg,dptp,htdg,mnrh,prcp,pres,snow,snwd,tmax,tmin,tmpw,wndd,wnds;
 quit;
-Attach latitude, longitude, and county names
+
+## Step 3: Attach latitude, longitude, and county names
 •	Download the county shapefile from the US Census website.
 https://catalog.data.gov/dataset/tiger-line-shapefile-2014-nation-u-s-current-county-and-equivalent-national-shapefile
 •	Transfer the .dbf file to SAS
@@ -149,7 +150,8 @@ data pncactm.weather;
   ObsDt = datejul(year*1000 + day);
   format ObsDt date9.;
 run;
-Impute missing values in R
+
+## Step 4: Impute missing values in R
 •	Transfer weather file back to SQL server for use in R.  
 -	I limited this file to years 2000 and forward.
 •	R Programs\tmin_interpolation.R
@@ -161,7 +163,8 @@ Impute missing values in R
 •	R Programs\snow_interpolation.R
 •	R Programs\snwd_interpolation.R
 •	R Programs\pres_interpolation.R
-Calculate derived variables in SAS
+
+## Step 5: Calculate derived variables in SAS
 •	Average temperature, cooling degree days, and heating degree days can be calculated based on values of high and low temperatures.
 data pncactm.weather_temp;
   set pncactm.weather_temp;
@@ -197,7 +200,8 @@ data pncactm.glm_weather_day_200001_201507;
   FrzPrcp = prcpany * tmin32 / 100;
 
 run;
-Compute statistics for each variable
+
+## Step 6: Compute statistics for each variable
 •	Max, Min, and Range don’t need to be calculated for dummy variables
 •	Missing values exist for kurtosis, skewness, and coefficient of variation when variable has only one value.
 /* Calculate stats for daily observations */
